@@ -152,9 +152,17 @@ BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/ariesve/recovery/graphics.c
 TARGET_RECOVERY_INITRC := device/samsung/ariesve/config/init.recovery.rc
 TARGET_RECOVERY_FSTAB := device/samsung/ariesve/recovery.fstab
 # Enable below line if compiling for a recovery version before 6.0.1.2
+<<<<<<< HEAD
 #BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun%d/file
+=======
+# BOARD_UMS_LUNFILE := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
+>>>>>>> 2150a54... Changes for new kernel
 # End recovery stuff
 
 TARGET_PREBUILT_KERNEL := device/samsung/ariesve/prebuilt/zImage
 
+<<<<<<< HEAD
+=======
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
+>>>>>>> 2150a54... Changes for new kernel
 
