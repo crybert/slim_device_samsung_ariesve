@@ -128,8 +128,20 @@
     <!-- Array of output values for LCD backlight corresponding to the LUX values
          in the config_autoBrightnessLevels array.  This array should have size one greater
          than the size of the config_autoBrightnessLevels array.
-         This must be overridden in platform specific overlays -->
+    -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
+        <item>20</item>
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>255</item>
+    </integer-array>
+
+    <!-- Array of output values for button backlight corresponding to the LUX values
+         in the config_autoBrightnessLevels array.  This array should have size one greater
+         than the size of the config_autoBrightnessLevels array.
+    -->
+    <integer-array name="config_autoBrightnessButtonBacklightValues">
         <item>20</item>
         <item>50</item>
         <item>100</item>
@@ -140,13 +152,14 @@
     <!-- Array of output values for keyboard backlight corresponding to the LUX values
          in the config_autoBrightnessLevels array.  This array should have size one greater
          than the size of the config_autoBrightnessLevels array.
-         This must be overridden in platform specific overlays -->
+         Crespo has no keyboard so all values are zero.
+    -->
     <integer-array name="config_autoBrightnessKeyboardBacklightValues">
-        <item>20</item>
-        <item>50</item>
-        <item>100</item>
-        <item>150</item>
-        <item>255</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </integer-array>
 
     <!-- Flag indicating whether we should enable automatic brightness for
