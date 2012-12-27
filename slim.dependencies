@@ -1,0 +1,12 @@
+[
+  {
+        "repository":   "ivendor/android_device_samsung_ariesve",
+        "target_path":  "vendor/samsung/ariesve",
+        "branch":     "jellybean"
+  },
+  {
+        "repository": "arco/samsung-kernel-msm7x30",
+        "target_path": "kernel/samsung/ariesve",
+        "branch": "ics-2.6.35"
+  }
+]

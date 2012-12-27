@@ -98,9 +98,9 @@
                    height="720"
                    frameRate="30" />
             <Audio codec="aac"
-                   bitRate="128000"
+                   bitRate="96000"
                    sampleRate="48000"
-                   channels="1" />
+                   channels="2" />
         </EncoderProfile>
 
         <EncoderProfile quality="480p" fileFormat="mp4" duration="60">
@@ -110,9 +110,9 @@
                    height="480"
                    frameRate="30" />
             <Audio codec="aac"
-                   bitRate="128000"
+                   bitRate="96000"
                    sampleRate="48000"
-                   channels="1" />
+                   channels="2" />
         </EncoderProfile>
 
         <EncoderProfile quality="qcif" fileFormat="3gp" duration="30">
@@ -135,9 +135,9 @@
                    frameRate="30" />
             <!-- audio setting is ignored -->
             <Audio codec="aac"
-                   bitRate="48000"
-                   sampleRate="16000"
-                   channels="1" />
+                   bitRate="96000"
+                   sampleRate="48000"
+                   channels="2" />
         </EncoderProfile>
 
         <EncoderProfile quality="timelapse480p" fileFormat="mp4" duration="60">
@@ -149,8 +149,8 @@
             <!-- audio setting is ignored -->
             <Audio codec="aac"
                    bitRate="96000"
-                   sampleRate="16000"
-                   channels="1" />
+                   sampleRate="48000"
+                   channels="2" />
         </EncoderProfile>
 
         <EncoderProfile quality="timelapseqcif" fileFormat="3gp" duration="30">
@@ -185,7 +185,7 @@
                    frameRate="15" />
            <Audio codec="aac"
                    bitRate="96000"
-                   sampleRate="16000"
+                   sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
 
@@ -210,7 +210,7 @@
             <!-- audio setting is ignored -->
             <Audio codec="aac"
                    bitRate="96000"
-                   sampleRate="16000"
+                   sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
 
@@ -263,8 +263,8 @@
 
     <AudioEncoderCap name="aac" enabled="true"
         minBitRate="8192" maxBitRate="96000"
-        minSampleRate="8000" maxSampleRate="16000"
-        minChannels="1" maxChannels="1" />
+        minSampleRate="8000" maxSampleRate="48000"
+        minChannels="1" maxChannels="2" />
 
     <AudioEncoderCap name="amrwb" enabled="true"
         minBitRate="6600" maxBitRate="23050"
@@ -296,7 +296,7 @@
         For this platform, it allows maximum 8MB(1.3MB per 720p frame x 6
         frames) memory.
     -->
-    <VideoEditorCap maxInputFrameWidth="1280" maxInputFrameHeight="720" maxOutputFrameWidth="1280" maxOutputFrameHeight="720" maxPrefetchYUVFrames="6"/>
+    <VideoEditorCap maxInputFrameWidth="1280" maxInputFrameHeight="720" maxOutputFrameWidth="720" maxOutputFrameHeight="480" maxPrefetchYUVFrames="3"/>
     <!--
         The VideoEditor Export codec profile and level values
         correspond to the values in OMX_Video.h.
@@ -308,7 +308,7 @@
     <!--
       Codec = h.264, Baseline profile, level 4
     -->
-    <ExportVideoProfile name="h264" profile="1" level="2048"/>
+    <ExportVideoProfile name="h264" profile="1" level="256"/>
     <!--
       Codec = h.263, Baseline profile, level 0
     -->
@@ -316,5 +316,5 @@
     <!--
       Codec = mpeg4, Simple profile, level 5
     -->
-    <ExportVideoProfile name="m4v" profile="1" level="128"/>
+    <ExportVideoProfile name="m4v" profile="1" level="16"/>
 </MediaSettings>

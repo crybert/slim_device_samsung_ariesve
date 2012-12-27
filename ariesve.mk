@@ -73,7 +73,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/bthid.ko:root/lib/modules/bthid.ko \
     $(LOCAL_PATH)/prebuilt/dhd.ko:root/lib/modules/dhd.ko \
-    $(LOCAL_PATH)/prebuilt/cifs.ko:root/lib/modules/cifs.ko
+    $(LOCAL_PATH)/prebuilt/cifs.ko:root/lib/modules/cifs.ko \
+    $(LOCAL_PATH)/prebuilt/bthid.ko:system/lib/modules/bthid.ko \
+    $(LOCAL_PATH)/prebuilt/dhd.ko:system/lib/modules/dhd.ko \
+    $(LOCAL_PATH)/prebuilt/cifs.ko:system/lib/modules/cifs.ko
     
 
 # LPM
@@ -122,8 +125,9 @@ PRODUCT_PACKAGES += \
     
 #HAL
 PRODUCT_PACKAGES += \
-	gps.msm7x30 \
-	camera.msm7x30 
+     lights.msm7x30 \
+     gps.msm7x30 \
+     camera.msm7x30 
 
 # QCOM OMX
 PRODUCT_PACKAGES += \
