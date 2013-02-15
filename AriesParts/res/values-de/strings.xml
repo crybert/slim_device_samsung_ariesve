@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Galaxy S Plus Einstellungen</string>
+
+    <string name="category_screen_title">Bildschirm</string>
+    <string name="color_tuning_title_head">Farbanpassung</string>
+    <string name="color_tuning_summary_head">Passe Farben an</string>
+    <string name="color_red_title">Rot</string>
+    <string name="color_green_title">Grün</string>
+    <string name="color_blue_title">Blau</string>
+    <string name="color_red_gamma_title">Rot Gamma</string>
+    <string name="color_green_gamma_title">Grün Gamma</string>
+    <string name="color_blue_gamma_title">Blau Gamma</string>
+    <string name="mdnie_title_head">mDNIe Modus</string>
+    <string name="mdnie_summary_head">Justiere mDNIe Bildschirm Nachbearbeitung</string>
+
+    <string name="category_touchkey_title">Sensortasten</string>
+    <string name="backlight_timeout_title_head">Sensortasten-Hintergrundbeleuchtung Zeitabschaltung</string>
+    <string name="backlight_timeout_summary_head">Justiere die Verzögerung bis zum Abschalten der Sensortasen-Hintergrundbeleuchtung</string>
+    <string name="backlight_wakelock_title_head">Aktivierung der Hintergrundbeleuchtung</string>
+    <string name="backlight_wakelock_summary_head">Aktiviere die Hintergrundbeleuchtung während des DeepSleep(WARNUNG Erhöhter Batterieverbrauch, wenn aktiviert)</string>
+    <string name="category_radio_title">Radio</string>
+    <string name="hspa_title_head">HSPA</string>
+    <string name="hspa_summary_head">Aktiviere HSDPA/HSUPA</string>
+
+    <string name="category_tvout_title">TV Out</string>
+    <string name="tvout_enable_head">TV Out</string>
+    <string name="tvout_enable_summary_nocable">TV Out nicht verbunden</string>
+    <string name="tvout_enable_summary">TV Out verbunden, zur Aktivierung ankreuzen</string>
+    <string name="tvout_enable_summary_on">TV Out aktiviert</string>
+    <string name="tvout_system_head">TV System</string>
+    <string name="tvout_system_summary">Setze dein TV System auf TV Out</string>
+
+    <string name="category_volume_boost_title">Lautstärkeregelung</string>
+    <string name="volume_boost_title_head">Anruf Lautstärkeregelung</string>
+    <string name="volume_boost_summary_head">Erhöhre Anruf-Lautstärke-Einstellungen</string>
+    <string name="boost_rcv_title">Ohrhörer Lautstärke</string>
+    <string name="boost_bt_title">Bluetooth Lautstärke</string>
+    <string name="boost_spk_title">Lautsprecher Lautstärke</string>
+    <string name="boost_hp_title">Kopfhörer Lautstärke</string>
+    <string name="mic_rcv_title">Ohrhörer Mikrofon</string>
+    <string name="mic_spk_title">Lautsprecher Mikrofon</string>
+    <string name="mic_hp_title">Kopfhörer Mikrofon</string>
+    <string name="mic_hp_no_mic_title">Kopfhörer (ohne Mik.) Mikrofon</string>
+    <string name="g_sensor_title">Horizontale Kalibrierung</string>
+    <string name="g_sensor_summary">Horizontale Kalibrierung mittels Beschleunigungssensor</string>
+    <string name="gsensor_ready">Platziere das Gerät auf einer ebenen Oberfläche und drücke Kalibrieren</string>
+    <string name="gsensor_calibrating">Kalibriere. Das Gerät nicht bewegen und warten...</string>
+    <string name="gsensor_nofile">Offset Datei nicht gefunden. Erneut versuchen.</string>
+    <string name="gsensor_end">Gerät kalibriert</string>
+    <string name="gsensor_button1">Fertig</string>
+    <string name="gsensor_button2">Kalibriere</string>
+</resources>
