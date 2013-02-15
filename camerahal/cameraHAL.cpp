@@ -31,12 +31,13 @@
 #include <unistd.h>
 
 #include <cutils/log.h>
-#include <ui/Overlay.h>
+#include <ui/legacy/Overlay.h>
 #include <camera/CameraParameters.h>
 #include <hardware/camera.h>
 #include <binder/IMemory.h>
 #include "CameraHardwareInterface.h"
 #include <cutils/properties.h>
+
 
 using android::sp;
 using android::Overlay;
@@ -60,6 +61,7 @@ static int camera_device_open(const hw_module_t* module, const char* name,
 static int camera_device_close(hw_device_t* device);
 static int camera_get_number_of_cameras(void);
 static int camera_get_camera_info(int camera_id, struct camera_info *info);
+static inline void rotateJPEG(void* src,size_t size);
 
 static struct hw_module_methods_t camera_module_methods = {
 open: camera_device_open
@@ -159,6 +161,7 @@ static void wrap_set_crop_hook(void *data,
     dev = (priv_camera_device_t*) data;
     //ALOGI("%s---: %i %i %i %i", __FUNCTION__, x, y, w, h);
 }
+
 //QiSS ME for preview
 static void wrap_queue_buffer_hook(void *data, void* buffer)
 {
@@ -202,8 +205,47 @@ static void wrap_queue_buffer_hook(void *data, void* buffer)
                                 GRALLOC_USAGE_SW_WRITE_MASK,
                                 0, 0, width, height, &vaddr)) {
         // the code below assumes YUV, not RGB
-        memcpy(vaddr, frame, width * height * 3 / 2);
-        //ALOGI("%s: copy frame to gralloc buffer", __FUNCTION__);
+        if (dev->cameraid==CAMERA_ID_FRONT) {
+            /*
+            * The YUV420 Semi-Planar frame is constructed as follows:
+            *
+            * - the Y values are stored in one plane:
+            * |-------------------------------| _
+            * | Y0 | Y1 | Y2 | Y3 | ... | |
+            * | ... | height
+            * | | |
+            * |-------------------------------| -
+            * <------------ width ------------>
+            *
+            * - the U and V values (sub-sampled by 2) are stored in another plane:
+            * |-------------------------------| _
+            * | U0 | V0 | U2 | V2 | .... | |
+            * | ... | height/2
+            * | | |
+            * |-------------------------------| -
+            * <------------ width ------------>
+            */
+
+            uint8_t *buff = (uint8_t *)vaddr;
+            int pos = 0;
+
+            //swap Y plane
+            for (int y = 0; y < height; ++y)
+            {
+                pos = y * width;                
+                for (int x = 0; x < width; ++x)
+                    buff[pos + x] = frame[pos + width - x];
+            }
+
+            //swap UV plane
+            for (int y = 0; y < height/2; ++y)
+            {
+                pos += width;
+                for (int x = 0; x < width; ++x)
+                    buff[pos + x] = frame[pos + width - x];
+            }
+        } else
+            memcpy(vaddr, frame, width * height * 3 / 2);
     } else {
         ALOGE("%s: could not lock gralloc buffer", __FUNCTION__);
         goto skipframe;
@@ -231,7 +273,7 @@ skipframe:
         }
         else
         {
-            LOGV("dumping data");
+            ALOGV("dumping data");
             written = write(file_fd, (char *)frame,
                             dev->preview_frame_size);
             if(written < 0)
@@ -249,7 +291,6 @@ skipframe:
 /*******************************************************************
  * camera interface callback
  *******************************************************************/
-
 static camera_memory_t *wrap_memory_data(priv_camera_device_t *dev,
                                          const sp<IMemory>& dataPtr)
 {
@@ -284,7 +325,7 @@ static camera_memory_t *wrap_memory_data(priv_camera_device_t *dev,
     }
     else
     {
-        LOGV("dumping jpeg");
+        ALOGV("dumping jpeg");
         written = write(file_fd, (char *)data,
                         size);
         if(written < 0)
@@ -299,6 +340,8 @@ static camera_memory_t *wrap_memory_data(priv_camera_device_t *dev,
     //ALOGI(" mem:%p,mem->data%p ",  mem,mem->data);
 
     memcpy(mem->data, data, size);
+    if (dev->cameraid==CAMERA_ID_FRONT)
+        rotateJPEG(mem->data,size);
     //ALOGI("%s---", __FUNCTION__);
 
     return mem;
@@ -408,6 +451,8 @@ void CameraHAL_FixupParams(android::CameraParameters &camParams, priv_camera_dev
         camParams.set(CameraParameters::KEY_ZOOM_RATIOS, "100,125,150,175,200,225,250,275,300,325,350,375,400");
         camParams.set(CameraParameters::KEY_ZOOM_SUPPORTED, CameraParameters::TRUE);
     }
+
+    camParams.set(CameraParameters::KEY_SUPPORTED_PREVIEW_FRAME_RATES, "30,15,7");
 
     camParams.set(CameraParameters::KEY_MAX_EXPOSURE_COMPENSATION, 4);
     camParams.set(CameraParameters::KEY_MIN_EXPOSURE_COMPENSATION, -4);
@@ -859,7 +904,7 @@ char* camera_get_parameters(struct camera_device * device)
 
     CameraHAL_FixupParams(camParams,dev);
 
-    camParams.set("orientation", "landscape");
+    camParams.set("orientation", "portrait");
 
     params_str8 = camParams.flatten();
     params = (char*) malloc(sizeof(char) * (params_str8.length()+1));
@@ -1121,12 +1166,28 @@ int camera_get_camera_info(int camera_id, struct camera_info *info)
     android::SEC_getCameraInfo(camera_id, &cameraInfo);
 
     info->facing = cameraInfo.facing;
-    if (info->facing == 1) // Correct orientation simulating mirror
-	    info->orientation = 270;
-    else
-	    info->orientation = 90;
+    info->orientation = 90;
 
     //ALOGI("%s: id:%i faceing:%i orientation: %i", __FUNCTION__,camera_id, info->facing, info->orientation);
 
     return rv;
 }
+	
+extern "C" {
+#include "exif/jhead.h"
+}
+
+static inline void rotateJPEG(void* src,size_t size) {
+    ReadMode_t ReadMode = READ_METADATA;
+
+    ALOGE("ResetJpgfile");
+    ResetJpgfile();
+
+    // Start with an empty image information structure.
+    memset(&CameraHALImageInfo, 0, sizeof(CameraHALImageInfo));
+
+    ALOGE("ReadJpegFile");
+    ReadJpegSectionsFromBuffer((unsigned char*)src, size, ReadMode);
+
+}
+

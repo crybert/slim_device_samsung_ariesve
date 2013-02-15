@@ -11,6 +11,7 @@ on init
     symlink /system/etc /etc
 
     mkdir /sdcard
+	mkdir /usbdisk
     mkdir /external_sd
     mkdir /system
     mkdir /data
@@ -38,13 +39,15 @@ service ueventd /sbin/ueventd
     critical
 
 service console /sbin/sh
+    class core
     console
     disabled
-    user shell
     group log
 
-on property:ro.secure=0
+on property:ro.debuggable=1
     start console
+
+service recovery /sbin/recovery
 
 # adbd is controlled by the persist.service.adb.enable system property
 service adbd /sbin/adbd

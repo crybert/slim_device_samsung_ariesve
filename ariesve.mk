@@ -35,6 +35,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
+
 
 # Feature live wallpaper
 PRODUCT_COPY_FILES += \
@@ -42,9 +46,9 @@ PRODUCT_COPY_FILES += \
 
 # Media configuration xml file
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml \
-	$(LOCAL_PATH)/config/media_codecs.xml:system/etc/media_codecs.xml 
-	
+    $(LOCAL_PATH)/config/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/config/init.qcom.rc:root/init.qcom.rc \
     $(LOCAL_PATH)/config/init.qcom.usb.rc:root/init.qcom.usb.rc \
@@ -77,7 +81,7 @@ PRODUCT_COPY_FILES += \
 # Modules
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/cifs.ko:root/lib/modules/cifs.ko \
-    $(LOCAL_PATH)/prebuilt/dhd.ko:root/lib/modules/dhd.ko    
+    $(LOCAL_PATH)/prebuilt/dhd.ko:root/lib/modules/dhd.ko
 
 # LPM
 PRODUCT_COPY_FILES += \
@@ -109,32 +113,23 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/lpm/media/battery_error.qmg:system/media/battery_error.qmg \
     $(LOCAL_PATH)/lpm/media/chargingwarning.qmg:system/media/chargingwarning.qmg
 
-#AUDIO
 PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    audio.primary.msm7x30 \
-    audio_policy.msm7x30 \
-    audio_policy.conf 
-
-    
-#GRALLOC
-PRODUCT_PACKAGES += \
+    camera.msm7x30 \
     copybit.msm7x30 \
     gralloc.msm7x30 \
-    hwcomposer.msm7x30
-    
-#HAL
-PRODUCT_PACKAGES += \
-     lights.msm7x30 \
-     gps.msm7x30 \
-     camera.msm7x30 
+    hwcomposer.msm7x30 \
+    gps.msm7x30 \
+    power.msm7x30 \
+    audio.primary.msm7x30 \
+    audio_policy.msm7x30 \
+    audio_policy.conf \
+    audio.a2dp.default \
+    lights.msm7x30
 
-# QCOM OMX
 PRODUCT_PACKAGES += \
+    libmm-omxcore \
     libOmxCore \
     libOmxVenc \
-    libmm-omxcore \
-    libdivxdrmdecrypt \
     libOmxVdec \
     libstagefrighthw \
     libI420colorconvert
@@ -148,13 +143,15 @@ PRODUCT_PACKAGES += \
     resize2fs \
     tune2fs \
     make_ext4fs \
-    rild \
-    setup_fs
+    setup_fs \
+    rild
 
 PRODUCT_PACKAGES += \
+	com.android.future.usb.accessory \
     hciconfig \
     hcitool \
-    libaudioutils
+    libaudioutils \
+    AriesParts
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \
