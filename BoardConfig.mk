@@ -155,8 +155,7 @@ TARGET_RECOVERY_FSTAB := device/samsung/ariesve/recovery.fstab
 BOARD_UMS_LUNFILE := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 # End recovery stuff
 
-#TARGET_PREBUILT_KERNEL := device/samsung/ariesve/prebuilt/zImage
-TARGET_KERNEL_CONFIG := ariesve_defconfig
+TARGET_PREBUILT_KERNEL := device/samsung/ariesve/prebuilt/zImage
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
