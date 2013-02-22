@@ -50,4 +50,8 @@
     <string name="gsensor_end">Gerät kalibriert</string>
     <string name="gsensor_button1">Fertig</string>
     <string name="gsensor_button2">Kalibriere</string>
+
+    <string name="category_fast_charge_title">Schnellladefunktion</string>
+    <string name="force_fast_charge_head">Erzwinge Schnellladefunktion</string>
+    <string name="force_fast_charge_summary_head">Erkennt über USB verbundenen PC als USB Ladegerät, um schneller zu Laden</string>
 </resources>
