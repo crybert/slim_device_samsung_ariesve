@@ -5,8 +5,8 @@
         "branch":     "jellybean"
   },
   {
-        "repository": "arco/samsung-kernel-msm7x30",
+        "repository": "ivendor/samsung-kernel-msm7x30.git",
         "target_path": "kernel/samsung/ariesve",
-        "branch": "ics-2.6.35"
+        "branch": "jb-3.0-pmem"
   }
 ]
