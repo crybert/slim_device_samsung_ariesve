@@ -1,6 +1,6 @@
 /dev/rtc0                 0600   system     system
 /dev/rtc1                 0600   system     system
-/dev/ttyHS0               0660   system     bluetooth
+/dev/ttyHS0               0660   bluetooth     bluetooth
 
 # the DIAG device node is world writable/readable.
 /dev/diag                 0666   root       root
@@ -33,10 +33,6 @@
 /dev/i2c-2                0660   root       system
 /dev/i2c-4                0660   root       system
 /dev/i2c-12               0770   system     system
-/dev/msm_mvs              0660   system     audio
-/dev/msm_voicememo        0660   system     audio
-/dev/qce                  0660   system     audio
-/dev/msm_pcm_lp_dec       0660   system     audio
 /dev/gemini0              0660   system     camera
 /dev/video*               0660   system     camera
 /dev/system_bus_freq      0660   system     system
@@ -45,11 +41,11 @@
 /dev/ledflash             0660   root       system
 /dev/fmradio              0660   system     system
 /dev/tspdrv               0660   system     system
-/dev/dun                  0660   system     system
 /dev/tun                  0660   system     vpn
 
 # permissions for video
 /dev/msm_vidc*            0660   system     audio
+
 
 # permissions for audio
 /dev/msm_amrnb            0660   system     audio
@@ -69,6 +65,11 @@
 /dev/msm_a2dp_in          0660   system     audio
 /dev/msm_amrnb_in         0660   system     audio
 /dev/msm_adc              0660   system     audio
+/dev/msm_mvs              0660   system     audio
+/dev/msm_voicememo        0660   system     audio
+/dev/qce                  0660   system     audio
+/dev/msm_pcm_lp_dec       0660   system     audio
+
 
 # permissions for dpram
 /dev/dpram0               0660   radio      radio
