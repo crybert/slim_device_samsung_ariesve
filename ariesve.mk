@@ -62,7 +62,8 @@ PRODUCT_COPY_FILES += \
 # Needed to reset bootmode when leaving recovery
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
-    $(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/system/bin/postrecoveryboot.sh
+    $(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/system/bin/postrecoveryboot.sh \
+    $(LOCAL_PATH)/config/init.qcom.usb.rc:recovery/root/usb.rc
 
 # Input device calibration files
 PRODUCT_COPY_FILES += \
