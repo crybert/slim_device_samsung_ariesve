@@ -204,7 +204,7 @@ static void wrap_queue_buffer_hook(void *data, void* buffer)
     if (0 == dev->gralloc->lock(dev->gralloc, *buf_handle,
                                 GRALLOC_USAGE_SW_WRITE_MASK,
                                 0, 0, width, height, &vaddr)) {
-        // the code below assumes YUV, not RGB
+        // the code below assumes YUV, not RGB	
         if (dev->cameraid==CAMERA_ID_FRONT) {
             /*
             * The YUV420 Semi-Planar frame is constructed as follows:
@@ -226,6 +226,7 @@ static void wrap_queue_buffer_hook(void *data, void* buffer)
             * <------------ width ------------>
             */
 
+			frame = frame - 2;
             uint8_t *buff = (uint8_t *)vaddr;
             int pos = 0;
 
