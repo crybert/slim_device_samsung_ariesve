@@ -16,7 +16,7 @@
 
 <resources>
     <!-- Whether the device has specific settings or not -->
-    <bool name="has_advanced_settings">false</bool>
+    <bool name="has_advanced_settings">true</bool>
     
     <!-- Dock Settings -->
 	<bool name="has_dock_settings">true</bool>
