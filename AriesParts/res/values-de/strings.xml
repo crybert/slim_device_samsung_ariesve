@@ -3,8 +3,8 @@
     <string name="app_name">Galaxy S Plus Einstellungen</string>
     <string name="category_screen_title">Bildschirm</string>
     <string name="category_touchkey_title">Sensortasten</string>
-    <string name="backlight_timeout_title_head">Sensortasten-Hintergrundbeleuchtung</string>
-    <string name="backlight_timeout_summary_head">Sensortasen-Hintergrundbeleuchtung Einstellungen (Externe Anwendung)</string>
+    <string name="backlight_title_head">Sensortasten-Hintergrundbeleuchtung</string>
+    <string name="backlight_summary_head">Sensortasen-Hintergrundbeleuchtung Einstellungen (Externe Anwendung)</string>
 
     <string name="g_sensor_title">Horizontale Kalibrierung</string>
     <string name="g_sensor_summary">Horizontale Kalibrierung mittels Beschleunigungssensor</string>
